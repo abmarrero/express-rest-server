@@ -1,10 +1,15 @@
 
-const {response} = require('express')
+const {response, request} = require('express')
 
-const usersGet = (req, res) => {
 
+const usersGet = (req = request , res =response) => {
+    const {q,nombre='no name',page,limit} = req.query
     res.json({
-        msg: 'get API - controller'
+        msg: 'get API - controller',
+        q,
+        page,
+        nombre,
+        limit,
     })
   }
   const usersPost = (req, res) => {
@@ -16,9 +21,11 @@ const usersGet = (req, res) => {
     })
   }
   const usersPut = (req, res) => {
-    
+    const { id } = req.params;  
+    // const id = req.params.id;
     res.json({
-        msg: 'put API - controller'
+        msg: 'put API - controller',
+        id
     })
   }
   const usersDelete = (req, res) => {
