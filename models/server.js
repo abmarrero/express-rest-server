@@ -7,12 +7,17 @@ const cors = require('cors')
         this.app = express();
         this.port = process.env.PORT;
         this.usuariosPath = '/api/usuarios'
+        // Middlerswares
         this.middlewares();
+        // Rutas de mi aplicacion
         this.routes();
     }
     middlewares(){
-        this.app.use(cors())
-
+        // CORS
+        this.app.use(cors());
+        // Lectura y parseo del body
+        this.app.use(express.json());
+        // Directorio Publico
         this.app.use( express.static( 'public'));
     }
     routes(){
