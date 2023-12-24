@@ -4,14 +4,14 @@ const { usersGet, usersPut, usersPost, usersDelete, usersPath } = require('../co
 const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos');
 
-const { isRoleValid } = require('../helpers/dbValidator');
+const { isRoleValid, emailExiste } = require('../helpers/dbValidator');
 
 
 const router = Router();
 
   router.get('/', usersGet)
 
-  router.put('/:id', usersPut)
+  router.put('/:id', usersPut) 
 
   router.post('/',[
     check('nombre','El nombre es obligatorio').not().isEmpty(),
@@ -19,6 +19,7 @@ const router = Router();
     // check('rol','No es un rol válido').isIn(['ADMIN_ROLE','USER_ROLE']),
     check('correo','El correo no es valido').isEmail(),
     check('rol').custom(isRoleValid),
+    // check('correo').custom( (correo) => emailExiste(correo) ),
       validarCampos
   ], usersPost)
 

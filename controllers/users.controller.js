@@ -24,12 +24,12 @@ const usersGet = (req = request , res =response) => {
     const salt = bcryptjs.genSaltSync(11);
     usuario.password =bcryptjs.hashSync(password, salt);
     
-    const existeEmail =await Usuario.findOne({correo})
+    const existeEmail = await Usuario.findOne({correo});
     if (existeEmail){
       return res.status(400).json({
-        msg:'Ese correo ya esta registrado'
-      })
-    }
+        msg: 'Ese correo ya está registrado'
+      });
+}
 
     await usuario.save();
     res.json({
