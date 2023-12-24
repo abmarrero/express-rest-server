@@ -37,12 +37,21 @@ const usersGet = (req = request , res =response) => {
         usuario
     })
   }
-  const usersPut = (req, res) => {
+  const usersPut = async(req, res=response) => {
     const { id } = req.params;  
     // const id = req.params.id;
+    const {password,correo,google,...resto} = req.body;
+
+    if(password){
+      const salt =bcryptjs.genSaltSync(11);
+      resto.password = bcryptjs.hashSync(password,salt);
+    }
+
+    const usuario = await Usuario.findByIdAndUpdate(id,resto);
+
     res.json({
         msg: 'put API - controller',
-        id
+        usuario
     })
   }
   const usersDelete = (req, res) => {
