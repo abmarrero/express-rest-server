@@ -28,7 +28,11 @@ const router = Router();
       validarCampos
   ], usersPost)
 
-  router.delete('/', usersDelete)
+  router.delete('/:id',[
+    check('id','El id no es valido').isMongoId(),
+    check('id').custom(existeUsuarioPorId),
+    validarCampos
+  ], usersDelete)
 
   router.patch('/', usersPath)
 

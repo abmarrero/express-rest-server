@@ -60,10 +60,15 @@ const usersGet = async(req = request , res =response) => {
         usuario
     })
   }
-  const usersDelete = (req, res) => {
-    
+  const usersDelete = async(req, res) => {
+      const id = req.params.id;
+
+      // Fisicamente lo borramos
+      // const usuario = await Usuario.findByIdAndDelete(id);
+
+      const usuario = await Usuario.findByIdAndUpdate(id,{estado:false});
     res.json({
-        msg: 'delete API - controller'
+       usuario
     })
   }
   const usersPath = (req, res) => {
