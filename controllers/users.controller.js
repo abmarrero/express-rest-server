@@ -5,14 +5,14 @@ const bcryptjs = require('bcryptjs')
 
 
 
-const usersGet = (req = request , res =response) => {
-    const {q,nombre='no name',page,limit} = req.query
-    res.json({
-        msg: 'get API - controller',
-        q,
-        page,
-        nombre,
-        limit,
+const usersGet = async(req = request , res =response) => {
+    const {limite=5,desde=0} = req.query
+    const usuarios = await Usuario.find()
+        .limit(Number(limite))
+        .skip(Number(desde));
+          
+      res.json({
+       usuarios
     }) 
   }
   const usersPost = async(req, res) => {
