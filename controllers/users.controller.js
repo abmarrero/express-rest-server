@@ -40,7 +40,7 @@ const usersGet = (req = request , res =response) => {
   const usersPut = async(req, res=response) => {
     const { id } = req.params;  
     // const id = req.params.id;
-    const {password,correo,google,...resto} = req.body;
+    const {_id,password,correo,google,...resto} = req.body;
 
     if(password){
       const salt =bcryptjs.genSaltSync(11);
