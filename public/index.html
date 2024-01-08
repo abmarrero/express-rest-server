@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Google SignIn</title>
 
-    <meta name="google-signin-client_id" content="567664070147-e39uv00fo83q325m1j9f3julmfrv933k.apps.googleusercontent.com">
+    <!-- <meta name="google-signin-client_id" content="64481723750-uchv91rp06ltsfvvat516m9pc68cohb1.apps.googleusercontent.com"> -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 <body>
     <h1>Google SignIn</h1>
     <hr>
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div>
    
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
 
     <script>
     function onSignIn(googleUser) {
@@ -22,7 +22,26 @@
         console.log('Image URL: ' + profile.getImageUrl());
         console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
       }
+      </script> -->
+      <button id="myButton">Iniciar sesión con Google</button>
+      <script>
+        function yourFunction() {
+          const client = google.accounts.oauth2.initCodeClient({
+            client_id: '64481723750-uchv91rp06ltsfvvat516m9pc68cohb1.apps.googleusercontent.com',
+            scope: 'https://www.googleapis.com/auth/userinfo.profile',
+            ux_mode: 'popup',
+            callback: (response) => {
+              if(response.code){
+                console.log(response.code)
+              }
+            },
+          });
+          client.requestCode();
+        }
+      
+        const myButton = document.querySelector('#myButton');
+        myButton.addEventListener('click', yourFunction);
       </script>
-   
+      <script src="https://accounts.google.com/gsi/client" async defer></script>
 </body>
 </html>
